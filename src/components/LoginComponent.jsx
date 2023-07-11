@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import linkedinLogo from "../assets/linkedinLogo.png";
 import { Link } from "react-router-dom";
 import "../sass/LoginComponent.scss";
-import { RegisterAPI } from "../API/authApi";
+import { LoginAPI, RegisterAPI } from "../API/AuthAPI";
+import { toast } from "react-toastify";
 const LoginComponent = () => {
   const [credentials, setCredentials] = useState({});
 
@@ -17,10 +18,10 @@ const LoginComponent = () => {
     e.preventDefault();
 
     try {
-      let res = await RegisterAPI(credentials.email, credentials.password);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+      let res = await LoginAPI(credentials.email, credentials.password);
+      toast.success("Logged in up successfully !!");
+    } catch (err) {
+      toast.error("Something went wrong!!");
     }
   };
 
